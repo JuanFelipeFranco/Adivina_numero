@@ -12,8 +12,13 @@ titulo.innerHTML= 'Juego del número secreto';
 let parrafo = document.querySelector('p');
 parrafo.innerHTML='indica un numero del 1 al 10';*/
 
-function intentoDeUsuario(){
-    alert('click')
+function verificarIntento(){
+    let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
+    console.log(typeof(numeroDeUsuario));
+    console.log(numeroSecreto)
+    console.log(typeof(numeroSecreto))
+    console.log(numeroDeUsuario);
+    console.log(numeroDeUsuario===numeroSecreto)
     return;
 }
 
