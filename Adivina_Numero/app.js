@@ -1,5 +1,7 @@
 let numeroSecreto = 0;
 let intentos = 0;
+let listaNumerosSorteados = []; 
+let numeroMaximo = 10;
 
 //DOM : DOCUMENT OBJECT MODEL
 //document nos permite trabajar de manera dinamica entre javascript y html; es un objeto donde le vamos a poner un texto.
@@ -20,7 +22,7 @@ function verificarIntento(){
     if(numeroDeUsuario === numeroSecreto){
         asignarTextoElemento('p',`Acertaste el número en ${intentos} ${(intentos===1)?'vez':'veces'}`)
         //activando boton nuevo juego cuando acertamos, cuando reinicia es solo un remove
-        document.getElementById('#reiniciar').removeAttribute('disabled');
+        document.getElementById('reiniciar').removeAttribute('disabled');
     }else{
         //el usuario no acerto.
         if (numeroDeUsuario > numeroSecreto) {
@@ -39,12 +41,24 @@ function limpiarCaja(){
 }
 
 function generarNumeroSecreto() {
-    return  Math.floor(Math.random()*10)+1;
+    let numeroGenerado = Math.floor(Math.random()*numeroMaximo)+1;
+
+    if (listaNumerosSorteados == numeroMaximo) {
+        asignarTextoElemento('p','Ya se sortearon los numeros posibles')
+    }else{
+        //si el numero esta en la lista
+        if (listaNumerosSorteados.includes(numeroGenerado)) {
+            return generarNumeroSecreto();//recursividad llamar funcion a si misma.
+        }else{
+            listaNumerosSorteados.push(numeroGenerado);
+            return numeroGenerado;
+        }
+    }
 }
 
 function condicionesIniciales(){
     asignarTextoElemento('h1','Juego del numero secreto');
-    asignarTextoElemento('p','indica un numero del 1 al 100');
+    asignarTextoElemento('p',`indica un numero del 1 al ${numeroMaximo}`);
     numeroSecreto = generarNumeroSecreto();
     intentos = 1;
 }
