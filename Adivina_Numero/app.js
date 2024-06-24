@@ -12,23 +12,27 @@ titulo.innerHTML= 'Juego del número secreto';
 let parrafo = document.querySelector('p');
 parrafo.innerHTML='indica un numero del 1 al 10';*/
 
+let numeroSecreto = generarNumeroSecreto();
+let intentos = 1;
+
+console.log(numeroSecreto);
+function generarNumeroSecreto() {
+    return numeroSecreto = Math.floor(Math.random()*10)+1;
+}
+
 function verificarIntento(){
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
     
     if(numeroDeUsuario === numeroSecreto){
-        asignarTextoElemento('p','Acertaste el número!')
+        asignarTextoElemento('p',`Acertaste el número en ${intentos} ${(intentos===1)?'vez':'veces'}`)
     }else{
         if (numeroDeUsuario > numeroSecreto) {
             asignarTextoElemento('p','El número es menor')
         }else{
             asignarTextoElemento('p','El número es mayor')
         }
+        intentos++; 
     }
     return;
 }
 
-let numeroSecreto = generarNumeroSecreto();
-console.log(numeroSecreto);
-function generarNumeroSecreto() {
-    return numeroSecreto = Math.floor(Math.random()*10)+1;
-}
